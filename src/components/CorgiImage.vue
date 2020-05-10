@@ -70,7 +70,11 @@ export default class CorgiImage extends Vue {
 }
 
 img {
-	min-width: 100%;
+	max-width: 100%;
+	max-height: calc(100vh - 6rem);
+	object-fit: contain;
+	margin: 0 auto;
+	border-radius: 1%;
 }
 
 .hero {
