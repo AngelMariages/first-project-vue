@@ -5,12 +5,19 @@ module.exports = {
 	pwa: {
 		name: 'Àngel first project in Vue',
 		workboxOptions: {
+			debug: true,
 			runtimeCaching: [{
 				urlPattern: new RegExp('https://cdn.jsdelivr.net/npm/bulma'),
 				handler: 'StaleWhileRevalidate',
 			}, {
-				urlPattern: new RegExp('https://images.dog.ceo/'),
-				handler: 'StaleWhileRevalidate',
+				urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+				handler: 'CacheFirst',
+				options: {
+					cacheName: 'images',
+					expiration: {
+						maxEntries: 30,
+					},
+				},
 			}],
 		},
 	},
