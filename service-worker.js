@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/first-project-vue/precache-manifest.eb840bc4ff8dc93be3035f82c9d7c8f9.js"
+  "/first-project-vue/precache-manifest.dcabec1aac326aacda71f88cc43d21be.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "first-project-vue"});
@@ -32,3 +32,5 @@ self.addEventListener('message', (event) => {
  */
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
+workbox.routing.registerRoute(/https:\/\/cdn.jsdelivr.net\/npm\/bulma/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
