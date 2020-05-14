@@ -12,12 +12,12 @@
 		>
 			<div class="hero-body">
 				<div class="container has-text-centered">
-					<img v-on:click="loadNewImage" :src="dogImg" v-on:load="imageLoaded" />
+					<img v-on:click="loadNewImage" :src="dogImgs[currentIndex]" v-on:load="imageLoaded" />
 				</div>
 			</div>
 
 			<div class="hero-foot">
-				<div class="field is-grouped has-addons has-addons-centered">
+				<div class="control-strip field has-addons has-addons-centered">
 					<p class="control">
 						<button
 							class="button is-primary is-outlined"
@@ -27,6 +27,7 @@
 							Previous
 						</button>
 					</p>
+					<p class="control"><a class="button is-static">{{ currentIndex + 1 }}</a></p>
 					<p class="control">
 						<button
 							class="button is-primary is-outlined"
@@ -50,42 +51,30 @@ const API_ENDPOINT = 'https://dog.ceo/api/breed/corgi/images/random';
 
 @Component
 export default class CorgiImage extends Vue {
-	private dogImg = '';
+	private currentIndex = 0;
 
 	private dogImgs: Array<string> = [];
 
 	private isLoading = false;
 
 	async loadNewImage(): Promise<void> {
-		this.dogImg = await this.getCorgiImg();
+		this.dogImgs.push(await this.getCorgiImg());
+		this.loadNextImage();
 	}
 
 	async loadNextImage(): Promise<void> {
-		console.log('previous', this.dogImgs);
-		const lastImg = this.dogImgs.shift();
-
-		if (lastImg) {
-			[this.dogImg] = this.dogImgs;
-
-			this.dogImgs.push(lastImg);
-
-			console.log('now', this.dogImgs);
+		if ((this.currentIndex + 1) > this.dogImgs.length - 1) {
+			this.currentIndex = 0;
 		} else {
-			this.dogImg = DEFAULT_IMG;
+			this.currentIndex += 1;
 		}
 	}
 
 	async loadPreviousImage(): Promise<void> {
-		console.log('previous', this.dogImgs);
-		const lastImg = this.dogImgs.pop();
-
-		if (lastImg) {
-			this.dogImg = this.dogImgs[this.dogImgs.length - 1];
-
-			this.dogImgs.unshift(lastImg);
-			console.log('now', this.dogImgs);
+		if ((this.currentIndex - 1) < 0) {
+			this.currentIndex = this.dogImgs.length - 1;
 		} else {
-			this.dogImg = DEFAULT_IMG;
+			this.currentIndex -= 1;
 		}
 	}
 
@@ -103,8 +92,6 @@ export default class CorgiImage extends Vue {
 		try {
 			const data = await fetch(API_ENDPOINT).then((resp) => resp.json());
 
-			this.dogImgs.push(data.message);
-
 			return data.message;
 		} catch (e) {
 			const dogs = this.dogImgs.length;
@@ -121,7 +108,7 @@ export default class CorgiImage extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .loader-wrapper {
 	position: absolute;
 	top: 0;
@@ -136,16 +123,20 @@ export default class CorgiImage extends Vue {
 	justify-content: center;
 	align-items: center;
 	border-radius: 6px;
+
+	& .loader {
+		height: 80px;
+		width: 80px;
+	}
+
+	&.is-active {
+		opacity: 1;
+		z-index: 1;
+	}
 }
 
-.loader-wrapper .loader {
-	height: 80px;
-	width: 80px;
-}
-
-.loader-wrapper.is-active {
-	opacity: 1;
-	z-index: 1;
+.control-strip {
+	padding-bottom: 4rem;
 }
 
 img {
