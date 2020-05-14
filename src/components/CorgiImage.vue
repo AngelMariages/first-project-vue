@@ -13,13 +13,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { precacheAndRoute } from 'workbox-precaching';
-
-precacheAndRoute([
-	{
-		url: 'https://images.dog.ceo/breeds/corgi-cardigan/n02113186_10505.jpg', revision: '02113186_10505',
-	},
-]);
 
 @Component
 export default class CorgiImage extends Vue {
