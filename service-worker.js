@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/first-project-vue/precache-manifest.dcabec1aac326aacda71f88cc43d21be.js"
+  "/first-project-vue/precache-manifest.8e63f9a6ad15b8cd5933dea0792a7196.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "first-project-vue"});
@@ -34,3 +34,4 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerRoute(/https:\/\/cdn.jsdelivr.net\/npm\/bulma/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
+workbox.routing.registerRoute(/https:\/\/images.dog.ceo\//, new workbox.strategies.StaleWhileRevalidate(), 'GET');
