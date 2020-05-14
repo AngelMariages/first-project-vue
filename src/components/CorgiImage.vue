@@ -3,9 +3,40 @@
 		<div class="loader-wrapper" :class="{ 'is-active': isLoading }">
 			<div class="loader is-loading"></div>
 		</div>
-		<div class="hero is-fullheight" :class="{ hidden: isLoading }">
+
+		<div
+			class="hero is-fullheight"
+			:class="{ hidden: isLoading }"
+			v-touch:swipe.right="loadPreviousImage"
+			v-touch:swipe.left="loadNextImage"
+		>
 			<div class="hero-body">
-				<img v-on:click="handleClick" :src="dogImg" v-on:load="imageLoaded" />
+				<div class="container has-text-centered">
+					<img v-on:click="loadNewImage" :src="dogImg" v-on:load="imageLoaded" />
+				</div>
+			</div>
+
+			<div class="hero-foot">
+				<div class="field is-grouped has-addons has-addons-centered">
+					<p class="control">
+						<button
+							class="button is-primary is-outlined"
+							v-on:click="loadPreviousImage"
+							:disabled="dogImgs.length == 0"
+						>
+							Previous
+						</button>
+					</p>
+					<p class="control">
+						<button
+							class="button is-primary is-outlined"
+							v-on:click="loadNextImage"
+							:disabled="dogImgs.length == 0"
+						>
+							Next
+						</button>
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -13,6 +44,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+
+const DEFAULT_IMG = 'https://images.dog.ceo/breeds/corgi-cardigan/n02113186_10505.jpg';
+const API_ENDPOINT = 'https://dog.ceo/api/breed/corgi/images/random';
 
 @Component
 export default class CorgiImage extends Vue {
@@ -22,8 +56,37 @@ export default class CorgiImage extends Vue {
 
 	private isLoading = false;
 
-	async handleClick(): Promise<void> {
+	async loadNewImage(): Promise<void> {
 		this.dogImg = await this.getCorgiImg();
+	}
+
+	async loadNextImage(): Promise<void> {
+		console.log('previous', this.dogImgs);
+		const lastImg = this.dogImgs.shift();
+
+		if (lastImg) {
+			this.dogImg = lastImg;
+
+			this.dogImgs.push(lastImg);
+
+			console.log('now', this.dogImgs);
+		} else {
+			this.dogImg = DEFAULT_IMG;
+		}
+	}
+
+	async loadPreviousImage(): Promise<void> {
+		console.log('previous', this.dogImgs);
+		const lastImg = this.dogImgs.pop();
+
+		if (lastImg) {
+			this.dogImg = lastImg;
+
+			this.dogImgs.unshift(lastImg);
+			console.log('now', this.dogImgs);
+		} else {
+			this.dogImg = DEFAULT_IMG;
+		}
 	}
 
 	async imageLoaded(): Promise<void> {
@@ -31,14 +94,14 @@ export default class CorgiImage extends Vue {
 	}
 
 	async mounted(): Promise<void> {
-		this.dogImg = await this.getCorgiImg();
+		await this.loadNewImage();
 	}
 
 	async getCorgiImg(): Promise<string> {
 		this.isLoading = true;
 
 		try {
-			const data = await fetch('https://dog.ceo/api/breed/corgi/images/random').then((resp) => resp.json());
+			const data = await fetch(API_ENDPOINT).then((resp) => resp.json());
 
 			this.dogImgs.push(data.message);
 
@@ -52,7 +115,7 @@ export default class CorgiImage extends Vue {
 				return this.dogImgs[Math.floor(Math.random() * dogs)];
 			}
 
-			return 'https://images.dog.ceo/breeds/corgi-cardigan/n02113186_10505.jpg';
+			return DEFAULT_IMG;
 		}
 	}
 }

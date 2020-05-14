@@ -4,6 +4,7 @@ module.exports = {
 		: '/',
 	pwa: {
 		name: 'Àngel first project in Vue',
+		debug: true,
 		workboxOptions: {
 			runtimeCaching: [{
 				urlPattern: new RegExp('https://cdn.jsdelivr.net/npm/bulma'),
