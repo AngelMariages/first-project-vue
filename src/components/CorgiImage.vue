@@ -44,8 +44,6 @@ export default class CorgiImage extends Vue {
 
 			return data.message;
 		} catch (e) {
-			console.error(e);
-
 			const dogs = this.dogImgs.length;
 
 			if (dogs) {
