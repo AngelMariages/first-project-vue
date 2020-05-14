@@ -46,6 +46,8 @@ export default class CorgiImage extends Vue {
 		} catch (e) {
 			const dogs = this.dogImgs.length;
 
+			this.isLoading = false;
+
 			if (dogs) {
 				return this.dogImgs[Math.floor(Math.random() * dogs)];
 			}
