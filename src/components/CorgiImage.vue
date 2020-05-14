@@ -65,7 +65,7 @@ export default class CorgiImage extends Vue {
 		const lastImg = this.dogImgs.shift();
 
 		if (lastImg) {
-			this.dogImg = lastImg;
+			[this.dogImg] = this.dogImgs;
 
 			this.dogImgs.push(lastImg);
 
@@ -80,7 +80,7 @@ export default class CorgiImage extends Vue {
 		const lastImg = this.dogImgs.pop();
 
 		if (lastImg) {
-			this.dogImg = lastImg;
+			this.dogImg = this.dogImgs[this.dogImgs.length - 1];
 
 			this.dogImgs.unshift(lastImg);
 			console.log('now', this.dogImgs);
