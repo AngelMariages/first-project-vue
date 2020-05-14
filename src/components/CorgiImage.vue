@@ -22,7 +22,7 @@
 						<button
 							class="button is-primary is-outlined"
 							v-on:click="loadPreviousImage"
-							:disabled="dogImgs.length == 0"
+							:disabled="dogImgs.length < 2"
 						>
 							Previous
 						</button>
@@ -31,7 +31,7 @@
 						<button
 							class="button is-primary is-outlined"
 							v-on:click="loadNextImage"
-							:disabled="dogImgs.length == 0"
+							:disabled="dogImgs.length < 2"
 						>
 							Next
 						</button>
