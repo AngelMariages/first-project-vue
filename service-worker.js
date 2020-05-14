@@ -34,4 +34,4 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerRoute(/https:\/\/cdn.jsdelivr.net\/npm\/bulma/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
-workbox.routing.registerRoute(/https:\/\/images.dog.ceo\//, new workbox.strategies.StaleWhileRevalidate(), 'GET');
+workbox.routing.registerRoute(/\.(?:png|jpg|jpeg|svg)$/, new workbox.strategies.CacheFirst({ "cacheName":"images", plugins: [new workbox.expiration.Plugin({ maxEntries: 30, purgeOnQuotaError: false })] }), 'GET');
