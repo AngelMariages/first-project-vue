@@ -8,6 +8,9 @@ module.exports = {
 			runtimeCaching: [{
 				urlPattern: new RegExp('https://cdn.jsdelivr.net/npm/bulma'),
 				handler: 'StaleWhileRevalidate',
+			}, {
+				urlPattern: new RegExp('https://images.dog.ceo/'),
+				handler: 'StaleWhileRevalidate',
 			}],
 		},
 	},

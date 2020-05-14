@@ -13,10 +13,19 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { precacheAndRoute } from 'workbox-precaching';
+
+precacheAndRoute([
+	{
+		url: 'https://images.dog.ceo/breeds/corgi-cardigan/n02113186_10505.jpg', revision: '02113186_10505',
+	},
+]);
 
 @Component
 export default class CorgiImage extends Vue {
 	private dogImg = '';
+
+	private dogImgs: Array<string> = [];
 
 	private isLoading = false;
 
@@ -35,9 +44,23 @@ export default class CorgiImage extends Vue {
 	async getCorgiImg(): Promise<string> {
 		this.isLoading = true;
 
-		const data = await fetch('https://dog.ceo/api/breed/corgi/images/random').then((resp) => resp.json());
+		try {
+			const data = await fetch('https://dog.ceo/api/breed/corgi/images/random').then((resp) => resp.json());
 
-		return data.message;
+			this.dogImgs.push(data.message);
+
+			return data.message;
+		} catch (e) {
+			console.error(e);
+
+			const dogs = this.dogImgs.length;
+
+			if (dogs) {
+				return this.dogImgs[Math.floor(Math.random() * dogs)];
+			}
+
+			return 'https://images.dog.ceo/breeds/corgi-cardigan/n02113186_10505.jpg';
+		}
 	}
 }
 </script>
