@@ -59,7 +59,7 @@ export default class CorgiImage extends Vue {
 
 	async loadNewImage(): Promise<void> {
 		this.dogImgs.push(await this.getCorgiImg());
-		this.loadNextImage();
+		this.currentIndex = this.dogImgs.length - 1;
 	}
 
 	async loadNextImage(): Promise<void> {
