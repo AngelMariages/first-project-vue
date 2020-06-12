@@ -84,7 +84,7 @@ export default class CorgiImage extends Vue {
 
 	async mounted(): Promise<void> {
 		await this.loadNewImage();
-		window.addEventListener('keypress', (e: KeyboardEvent) => {
+		window.addEventListener('keydown', (e: KeyboardEvent) => {
 			if (e.key === 'ArrowLeft') {
 				this.loadPreviousImage();
 			} else if (e.key === 'ArrowRight') {
