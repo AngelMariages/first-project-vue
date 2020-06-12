@@ -12,7 +12,12 @@
 		>
 			<div class="hero-body">
 				<div class="container has-text-centered">
-					<img v-on:click="loadNewImage" :src="dogImgs[currentIndex]" v-on:load="imageLoaded" />
+					<img
+						v-on:click="loadNewImage"
+						:src="dogImgs[currentIndex]"
+						alt="A beautiful Corgi"
+						v-on:load="imageLoaded"
+					/>
 				</div>
 			</div>
 
@@ -27,7 +32,9 @@
 							Previous
 						</button>
 					</p>
-					<p class="control"><a class="button is-static">{{ currentIndex + 1 }}</a></p>
+					<p class="control">
+						<a class="button is-static">{{ currentIndex + 1 }}</a>
+					</p>
 					<p class="control">
 						<button
 							class="button is-primary is-outlined"
@@ -63,7 +70,7 @@ export default class CorgiImage extends Vue {
 	}
 
 	async loadNextImage(): Promise<void> {
-		if ((this.currentIndex + 1) > this.dogImgs.length - 1) {
+		if (this.currentIndex + 1 > this.dogImgs.length - 1) {
 			this.currentIndex = 0;
 		} else {
 			this.currentIndex += 1;
@@ -71,7 +78,7 @@ export default class CorgiImage extends Vue {
 	}
 
 	async loadPreviousImage(): Promise<void> {
-		if ((this.currentIndex - 1) < 0) {
+		if (this.currentIndex - 1 < 0) {
 			this.currentIndex = this.dogImgs.length - 1;
 		} else {
 			this.currentIndex -= 1;

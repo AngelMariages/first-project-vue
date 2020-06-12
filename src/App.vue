@@ -7,7 +7,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import CorgiImage from '@/components/CorgiImage.vue';
-import '../node_modules/bulma/css/bulma.css';
+// import '../node_modules/bulma/css/bulma.css';
 
 @Component({
 	components: {
