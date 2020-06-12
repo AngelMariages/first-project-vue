@@ -5,6 +5,13 @@ module.exports = {
 	pwa: {
 		name: 'Àngel first project in Vue',
 		debug: true,
+		iconPaths: {
+			favicon32: null,
+			favicon16: null,
+			appleTouchIcon: null,
+			maskIcon: null,
+			msTileImage: null,
+		},
 		workboxOptions: {
 			runtimeCaching: [{
 				urlPattern: new RegExp('https://cdn.jsdelivr.net/npm/bulma'),
@@ -19,13 +26,6 @@ module.exports = {
 					},
 				},
 			}],
-			iconPaths: {
-				favicon32: null,
-				favicon16: null,
-				appleTouchIcon: null,
-				maskIcon: null,
-				msTileImage: null,
-			},
 		},
 	},
 };
