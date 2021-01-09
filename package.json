@@ -21,7 +21,7 @@
     "workbox-precaching": "5.1.3"
   },
   "devDependencies": {
-    "@types/jest": "24.9.1",
+    "@types/jest": "26.0.20",
     "@types/workbox-precaching": "4.3.0",
     "@typescript-eslint/eslint-plugin": "2.31.0",
     "@typescript-eslint/parser": "2.31.0",
