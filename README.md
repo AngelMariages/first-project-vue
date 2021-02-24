@@ -7,6 +7,7 @@ What a cool name! 😉
 # Features
 - [Bulma](https://bulma.io/) CSS framework to build the awesome UI
 - [Workbox](https://developers.google.com/web/tools/workbox) to bring the best CorgiPWA experience
+- Renovate ❄️
 - [vue-touch-events](https://github.com/jerrybendy/vue-touch-events) for the  nicest interactiveness
 - [Typescript!](https://www.typescriptlang.org/)
 - vue-cli
