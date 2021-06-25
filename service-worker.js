@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/first-project-vue/precache-manifest.effc946bbef0e1d00ea4d1e855b085af.js"
+  "/first-project-vue/precache-manifest.f3e1e970651fc12bd01fb4d35250b42b.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "first-project-vue"});
