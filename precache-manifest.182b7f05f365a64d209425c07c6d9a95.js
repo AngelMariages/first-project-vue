@@ -1,15 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0a17c16ed1dd49c8c123",
+    "revision": "53604bc8dcba5c2a4eb6",
     "url": "/first-project-vue/css/app.2ac5171d.css"
   },
   {
-    "revision": "f2686825cb2b23bae1cda2672734f6e6",
+    "revision": "c830291cbf5886d1b14e72a879838c5b",
     "url": "/first-project-vue/index.html"
   },
   {
-    "revision": "0a17c16ed1dd49c8c123",
-    "url": "/first-project-vue/js/app.632976b7.js"
+    "revision": "53604bc8dcba5c2a4eb6",
+    "url": "/first-project-vue/js/app.8537e9cc.js"
   },
   {
     "revision": "cf1d6627daf269cc3871",
